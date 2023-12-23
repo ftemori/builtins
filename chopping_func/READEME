@@ -1,0 +1,5 @@
+This function splits a string into words.
+If there is a '=' in the string, it would be put into a seperate string.
+
+It also checks for "" and ''. It checks for the correct amount of them and also for the correct order of use.
+But it does not put a string with '' "" into a 2d array.
