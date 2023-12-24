@@ -183,7 +183,6 @@ char	**input_validation(char *tmp)
 		return (NULL);
 	}
 	data.word_count = word_counter(&data);
-	printf("wc: %i\n", data.word_count);
 	if (data.word_count == 0)
 	{
 		free(tmp);
