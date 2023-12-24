@@ -101,7 +101,6 @@ int	quo_order(char *tmp, t_data *data)
 
 int	ft_strcpy(t_data *data, char *tmp, int len, int k)
 {
-	printf("tmp CPY: <%s>\n", tmp);
 	int	i = 0;
 	data->array[k] = malloc((len + 1) * sizeof(char));
 	if (!data->array[k])
