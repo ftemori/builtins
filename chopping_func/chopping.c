@@ -152,6 +152,10 @@ int	chop_the_string(char *tmp, t_data *data)
 int	word_counter(t_data *data)
 {
 	int	i = 0, k = 0;
+	while (data->tmp[i] == ' ')
+		i++;
+	if (data->tmp[i] == '\0')
+		return (0);
 	while (data->tmp[i] != '\0')
 	{
 		if (data->tmp[i] == ' ' && data->tmp[i + 1] != ' ' && \
@@ -179,9 +183,9 @@ char	**input_validation(char *tmp)
 		return (NULL);
 	}
 	data.word_count = word_counter(&data);
+	printf("wc: %i\n", data.word_count);
 	if (data.word_count == 0)
 	{
-
 		free(tmp);
 		return (NULL);
 	}
