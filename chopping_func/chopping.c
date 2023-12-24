@@ -103,7 +103,6 @@ int	quo_order(char *tmp, t_data *data)
 int	ft_strcpy(t_data *data, char *tmp, int len, int k)
 {
 	int	i = 0;
-	printf("TMP: %s   | i: %i\n", tmp, len);
 	data->array[k] = malloc((len + 1) * sizeof(char));
 	if (!data->array[k])
 		return (-1);
@@ -125,8 +124,6 @@ int	space_splitt(t_data *data, char *tmp, int k)
 		i++;
 	tmp = tmp + i;
 	i = 0;
-// THERE IS A PROBLEM IN THIS FUNCTION: IT IS NOT PUTTING THE '=' SIGN TO THE ARRAY!
-// =================================================================================
 	while (tmp[i] != '\0' && tmp[i] != ' ' && tmp[i] != '=')
 		i++;
 	if (tmp[0] != '=')
@@ -162,8 +159,12 @@ int	word_counter(t_data *data)
 			k++;
 		if (data->tmp[i] == '=')
 			k++;
+		if (data->tmp[i] == '=' && data->tmp[i + 1] != ' ')
+			k++;
 		i++;
 	}
+	if (k == 0 && data->tmp[0] != '\0')
+		k++;
 	return (k);
 }
 
@@ -178,19 +179,22 @@ char	**input_validation(char *tmp)
 		return (NULL);
 	}
 	data.word_count = word_counter(&data);
+	if (data.word_count == 0)
+	{
+
+		free(tmp);
+		return (NULL);
+	}
 	if (data.sqn + data.dqn > 0)
 		if (quo_order(tmp, &data) == -1)
 		{
 			free(tmp);
 			return (NULL);
 		}
-	data.array = malloc((data.word_count + 1) * sizeof(char *));
+	data.array = malloc((data.word_count + 3) * sizeof(char *));
 	if (chop_the_string(tmp, &data) == -1)
-	{
-		printf("not working BROOOOO\n");
 		return (NULL);
-	}
-
+	free(tmp);
 	return (data.array);
 }
 
@@ -209,7 +213,9 @@ int	main(void)
 	while (array[i] != NULL)
 	{
 		printf("<%s>\n", array[i]);
+		free(array[i]);
 		i++;
 	}
+	free(array);
 	return (0);
 }
