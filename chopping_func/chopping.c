@@ -147,7 +147,7 @@ int	ft_chopper(t_data *data, char *tmp, int k)
 		tmp = tmp + i;
 		i = 0;
 	}
-	else if (tmp[0] != '=')
+	else if (tmp[0] != '=' && tmp[0] != '\0')
 		ft_strcpy(data, tmp, i, k);
 	else if (tmp[0] == '=')
 	{
